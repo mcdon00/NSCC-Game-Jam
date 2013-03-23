@@ -6,6 +6,7 @@
         <title>Brickbreaker</title>
         <script type="text/javascript" src="http://code.createjs.com/createjs-2013.02.12.min.js"></script>
         <script type="text/javascript" src="classes/Character.js"></script>
+        <script type="text/javascript" src="classes/Enemy.js"></script>
         <script type="text/javascript">
 
         var delta;
@@ -22,6 +23,11 @@
 
         	player = new Character(stage);
         	player.init();
+
+            enemy = new Enemy(myStage);
+            enemy.init();
+
+
         }
 
         function tick(){
@@ -29,6 +35,7 @@
         	delta = event.delta;
         	player.move();
         	angle += 4;
+
         }
 
 

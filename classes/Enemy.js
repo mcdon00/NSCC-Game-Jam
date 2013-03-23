@@ -4,7 +4,7 @@ function Enemy(myStage){
 	var SPEED = 7;
 
 	//------------------------------contructor
-	this.init = function(){
+	this.init = function(myStage){
 	
 		this.speed = SPEED;
 		this.stage = myStage
@@ -41,7 +41,7 @@ function Enemy(myStage){
 		hy = Math.sqrt((targetY * targetY) + (targetX * targetX));
 		
 
-		
+
 
 
 		// if (!isXNeg && !isYNeg) {
