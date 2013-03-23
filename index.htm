@@ -10,6 +10,7 @@
                 margin:0;
             }
         </style>
+        <script type="text/javascript" src="classes/Collision.js"></script>
         <script type="text/javascript" src="http://code.createjs.com/createjs-2013.02.12.min.js"></script>
         <script type="text/javascript" src="classes/Character.js"></script>
         <script type="text/javascript" src="classes/Enemy.js"></script>
@@ -19,8 +20,10 @@
         var delta;
         var angle;
         var assetManager;
+        var enemies = [];
 
         function init(){
+
         	//Create stage
         	//canvas.color = "black";
         	//assetManager = new AssetManager();
@@ -33,21 +36,30 @@
         	player = new Character(stage);
         	player.init();
 
-
-        	createjs.Ticker.addEventListener("tick", tick);
-
             enemy = new Enemy(stage);
             enemy.init();
 
+        	createjs.Ticker.addEventListener("tick", tick);
         }
 
         function tick(event){
-
         	delta = event.delta;
         	angle += 4;
         	player.move();
-        	stage.update(delta);
-        	enemy.checkPlayerPos(player.clip.x,player.clip.y);
+
+
+            enemy.checkPlayerPos(player.clip.x,player.clip.y);
+
+
+            //-------------collision detection
+            var intersection = ndgmr.checkRectCollision(player.clip,enemy.clip);
+            if(intersection){
+                stage.removeChild(enemy.clip);
+                enemy.clip.x = -2000;
+            }
+
+
+        	stage.update(delta);        	
         }
 
 
