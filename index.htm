@@ -4,10 +4,44 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Brickbreaker</title>
-        <link rel="stylesheet" type="text/css" href="styles.css">
+        <script type="text/javascript" src="http://code.createjs.com/createjs-2013.02.12.min.js"></script>
+        <script type="text/javascript" src="classes/Character.js"></script>
+        <script type="text/javascript">
+
+        var delta;
+        var angle;
+
+        function init(){
+        	//Create stage
+        	canvas.color = "black";
+        	canvas = document.getElementById("canvas");
+        	canvas.height = window.innerHeight;
+			canvas.width = window.innerWidth;
+			stage = new createjs.Stage(canvas);
+
+
+        	player = new Character(stage);
+        	player.init();
+        }
+
+        function tick(){
+
+        	delta = event.delta;
+        	player.move();
+        	angle += 4;
+        }
+
+
+
+
+
+
+
+
+        </script>
     </head>
-    <body>
-        <canvas id="canvas"></canvas>
+    <body onload="init();">
+        <canvas id="canvas" style="background-color:black;"></canvas>
         <script type="text/javascript" src="script.js"></script>
     </body>
 </html>
