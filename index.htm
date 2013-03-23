@@ -11,8 +11,10 @@
             }
         </style>
         <script type="text/javascript" src="http://code.createjs.com/createjs-2013.02.12.min.js"></script>
+        <script type="text/javascript" src="http://code.createjs.com/preloadjs-0.2.0.min.js"></script>
         <script type="text/javascript" src="classes/Character.js"></script>
         <script type="text/javascript" src="classes/Enemy.js"></script>
+        <script type="text/javascript" src="classes/Bullet.js"></script>
         <script type="text/javascript" src="classes/AssetManager.js"></script>
         <script type="text/javascript">
 
@@ -22,9 +24,10 @@
 
         function init(){
         	//Create stage
-        	//canvas.color = "black";
-        	//assetManager = new AssetManager();
-        	//assetManager.load();
+
+        	assetManager = new AssetManager();
+        	assetManager.load();
+
         	canvas = document.getElementById("canvas");
         	canvas.height = 600;
 			canvas.width = 800;
@@ -33,7 +36,6 @@
         	player = new Character(stage);
         	player.init();
 
-
         	createjs.Ticker.addEventListener("tick", tick);
 
             enemy = new Enemy(stage);
@@ -41,14 +43,32 @@
 
         }
 
+        function addBullet(){
+			bullet = new Bullet(stage);
+        	bullet.init();     
+        	stage.addChild(bullet.clip); 
+        	console.log('added bullet');  	
+        }
+
+        function onMouseDown(){
+        	addBullet();
+        }
+
         function tick(event){
 
         	delta = event.delta;
-        	angle += 4;
         	player.move();
-        	stage.update(delta);
         	enemy.checkPlayerPos(player.clip.x,player.clip.y);
+
+
+
+
+        	stage.update(delta);
+
+
         }
+
+        document.addEventListener("mousedown", onMouseDown, true);
 
 
         </script>

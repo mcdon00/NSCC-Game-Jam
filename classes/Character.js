@@ -3,6 +3,7 @@ var up = false;
 var down = false;
 var left = false;
 var right = false;
+var aryRadians = [];
 
 //Initialize the object
 function Character(myStage){
@@ -17,12 +18,13 @@ function Character(myStage){
 		this.isAlive = true;
 		this.stage = myStage
 		
+		//Sean if you are watching this.. don't get mad that we are being redundant :(:(
 		var ss = new createjs.SpriteSheet({ "animations":{
 	        "stand":[0, 0]},
 	        "images":["lib/character_sheet.png"],
 	        "frames":{
-	            "regX":0,
-	            "regY":0,
+	            "regX":25,
+	            "regY":32.5,
 	            "height":65,
 	            "width":50,
 	            "count":3

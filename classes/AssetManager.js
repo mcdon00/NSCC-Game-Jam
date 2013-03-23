@@ -8,45 +8,9 @@ var AssetManager = function() {
 	var manifest = [{src:"character_sheet.png", id:"Character", data:{
 						width:50, height:65, regPoint:"topLeft",
 						animations:{walk:[0,0]}
-					}},
-					{src:"lib/BluePlane.png", id:"BluePlane", data:{
-						width:40, height:20, regPoint:"center", 
-						animations:{flyRight:[0,1],flyLeft:[2,3]}
-					}},
-					{src:"lib/bullet.png", id:"Bullet", data:{
-						width:5, height:5, regPoint:"center", 
-						animations:{main:[0,0]}
-					}},
-					{src:"lib/Survivor.png", id:"Survivor", data:{
-						width:14, height:14, regPoint:"topLeft", 
-						animations:{walkLeft:[0,11],walkRight:[12,23],standing:[24,35],waving:[36,47]}
-					}},					
-					{src:"lib/Clouds.png", id:"Clouds", data:{
-						width:316, height:76, regPoint:"topLeft", 
-						animations:{cloud1:[0,0],cloud2:[1,1],cloud3:[2,2]}
-					}},
-					{src:"lib/Ground.png", id:"Ground", data:{
-						width:4800, height:17, regPoint:"topLeft", 
-						animations:{main:[0,0]}
-					}},
-					{src:"lib/Hills.png", id:"Hills", data:{
-						width:4800, height:60, regPoint:"topLeft", 
-						animations:{main:[0,0]}
-					}},
-					{src:"lib/RedFlag.png", id:"RedFlag", data:{
-						width:22, height:53, regPoint:"topLeft", 
-						animations:{main:[0,35]}
-					}},
-					{src:"lib/Base.png", id:"Base", data:{
-						width:126, height:78, regPoint:"topLeft", 
-						animations:{main:[0,0]}
-					}},
-					{src:"lib/Prison.png", id:"Prison", data:{
-						width:50, height:40, regPoint:"topLeft", 
-						animations:{main:[0,0],breakout:[1,18]}
-					}},
-					{src:"lib/stop.mp3|lib/stop.wav", id:"SndStop"},
-					{src:"lib/start.mp3|lib/start.wav", id:"SndStart"}];
+					}}];
+
+
 					
 	// keep track of assets
 	var counter = 0;
@@ -58,7 +22,7 @@ var AssetManager = function() {
 	var preloader;
 	// construct custom event object and initialize it
 	var readyEvt = document.createEvent("Event");
-	readyEvt.initEvent("onReady", true, true);    
+	readyEvt.initEvent("onready", true, true);    
 
 	// ------------------------------------------------------ event handlers
 	onLoaded = function(e) {
