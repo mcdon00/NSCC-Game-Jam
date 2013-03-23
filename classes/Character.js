@@ -15,9 +15,9 @@ function Character(myStage){
 		this.armor = 10;
 		this.inventory = {};
 		this.isAlive = true;
-		this.stage = myStage
+		this.stage = myStage;
 		this.clip = new createjs.Shape();
-		this.clip.graphics.beginStroke("white").drawPolyStar(0, 0, 15, 3, 0, angle);
+		this.clip.graphics.beginStroke("white").drawPolyStar(0, 0, 15, 3, 0, 10);
 		this.clip.y = window.innerHeight/2;
 		this.clip.x = window.innerWidth/2;
 		stage.addChild(this.clip);
