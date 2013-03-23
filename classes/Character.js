@@ -17,11 +17,7 @@ function Character(myStage){
 		this.inventory = {};
 		this.isAlive = true;
 		this.stage = myStage
-<<<<<<< HEAD
-=======
-		
-		//Sean if you are watching this.. don't get mad that we are being redundant :(:(
->>>>>>> c2fa10cb4d330d5c86618ee01c08b3f67c2d2458
+
 		var ss = new createjs.SpriteSheet({ "animations":{
 	        "stand":[0, 0]},
 	        "images":["lib/character_sheet.png"],
