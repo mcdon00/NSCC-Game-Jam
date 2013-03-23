@@ -4,49 +4,46 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Brickbreaker</title>
+        <style type="text/css">
+            body{
+                padding:0;
+                margin:0;
+            }
+        </style>
         <script type="text/javascript" src="http://code.createjs.com/createjs-2013.02.12.min.js"></script>
         <script type="text/javascript" src="classes/Character.js"></script>
         <script type="text/javascript" src="classes/Enemy.js"></script>
         <script type="text/javascript">
 
-        var delta;
-        var angle;
+            var delta;
+            var angle;
 
-        function init(){
-        	//Create stage
-        	//canvas.color = "black";
-        	canvas = document.getElementById("canvas");
-        	canvas.height = window.innerHeight;
-			canvas.width = window.innerWidth;
-			stage = new createjs.Stage(canvas);
+            function init(){
+            	//Create stage
+            	//canvas.color = "black";
+            	canvas = document.getElementById("canvas");
+            	canvas.height = 600;
+    			canvas.width = 800;
+    			stage = new createjs.Stage(canvas);
 
+            	player = new Character(stage);
+            	player.init();
 
-        	player = new Character(stage);
-        	player.init();
+                enemy = new Enemy(stage);
+                enemy.init();
 
+                createjs.Ticker.addEventListener("tick", tick);
+            }
 
-        	createjs.Ticker.addEventListener("tick", tick);
+            function tick(event){
 
-            enemy = new Enemy(myStage);
-            enemy.init();
+            	delta = event.delta;
+            	player.move();
+            	angle += 4;
+                enemy.checkPlayerPos(player.clip.x,player.clip.y);
+            	stage.update(delta);
 
-        }
-
-        function tick(event){
-
-        	delta = event.delta;
-        	player.move();
-        	angle += 4;
-        	stage.update(delta);
-        }
-
-
-
-
-
-
-
-
+            }
         </script>
     </head>
     <body onload="init();">
