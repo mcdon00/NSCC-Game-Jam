@@ -4,6 +4,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Brickbreaker</title>
+        <style type="text/css">
+            body{
+                padding:0;
+                margin:0;
+            }
+        </style>
         <script type="text/javascript" src="http://code.createjs.com/createjs-2013.02.12.min.js"></script>
         <script type="text/javascript" src="classes/Character.js"></script>
         <script type="text/javascript" src="classes/Enemy.js"></script>
@@ -30,8 +36,8 @@
 
         	createjs.Ticker.addEventListener("tick", tick);
 
-            //enemy = new Enemy(stage);
-            //enemy.init();
+            enemy = new Enemy(stage);
+            enemy.init();
 
         }
 
@@ -41,13 +47,8 @@
         	angle += 4;
         	player.move();
         	stage.update(delta);
+        	enemy.checkPlayerPos(player.clip.x,player.clip.y);
         }
-
-
-
-
-
-
 
 
         </script>
