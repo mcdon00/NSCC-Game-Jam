@@ -12,6 +12,8 @@ function Bullet(){
 		moving = false;
 		speed = 15;
 		
+
+
 		this.clip = new createjs.Shape();
 		this.clip.graphics.beginFill("white").drawRect(-2 , -2 , 3, 3);
 		this.clip.y = test.getPosY();
