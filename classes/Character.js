@@ -17,8 +17,7 @@ function Character(myStage){
 		this.inventory = {};
 		this.isAlive = true;
 		this.stage = myStage
-		
-		//Sean if you are watching this.. don't get mad that we are being redundant :(:(
+
 		var ss = new createjs.SpriteSheet({ "animations":{
 	        "stand":[0, 0]},
 	        "images":["lib/character_sheet.png"],

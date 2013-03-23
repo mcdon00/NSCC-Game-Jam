@@ -9,8 +9,19 @@ function Enemy(myStage){
 	
 		this.speed = SPEED;
 		this.stage = myStage
-		this.clip = new createjs.Shape();
-		this.clip.graphics.beginStroke("white").drawCircle(0,0,4);
+		var ss = new createjs.SpriteSheet({ "animations":{
+	        "stand":[0, 0]},
+	        "images":["lib/character_sheet.png"],
+	        "frames":{
+	            "regX":0,
+	            "regY":0,
+	            "height":65,
+	            "width":50,
+	            "count":3
+	        }
+    	});
+    	this.clip = new createjs.BitmapAnimation(ss);
+    	this.clip.gotoAndPlay("stand");
 		this.clip.y = window.innerHeight/3;
 		this.clip.x = window.innerWidth/3;
 		this.vx = 1;
@@ -58,8 +69,8 @@ function Enemy(myStage){
 				this.vy = targetY/hy;
 			}
 			
-			this.vx = this.vx *2; 
-			this.vy = this.vy *2; 
+			this.vx = this.vx *4; 
+			this.vy = this.vy *4; 
 		
 		if(distance <= DISTANCE_TO_ATTACK){
 			this.isAttack = true;
@@ -75,6 +86,10 @@ function Enemy(myStage){
 			this.clip.y += this.vy;
 		}	
 	}
-	
+
+	this.attack = function(myPlayer){
+
+	}
+
 
 }

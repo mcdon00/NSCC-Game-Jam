@@ -10,6 +10,7 @@
                 margin:0;
             }
         </style>
+        <script type="text/javascript" src="classes/Collision.js"></script>
         <script type="text/javascript" src="http://code.createjs.com/createjs-2013.02.12.min.js"></script>
         <script type="text/javascript" src="http://code.createjs.com/preloadjs-0.2.0.min.js"></script>
         <script type="text/javascript" src="classes/Character.js"></script>
@@ -21,8 +22,10 @@
         var delta;
         var angle;
         var assetManager;
+        var enemies = [];
 
         function init(){
+
         	//Create stage
 
         	assetManager = new AssetManager();
@@ -36,11 +39,10 @@
         	player = new Character(stage);
         	player.init();
 
-        	createjs.Ticker.addEventListener("tick", tick);
-
             enemy = new Enemy(stage);
             enemy.init();
 
+        	createjs.Ticker.addEventListener("tick", tick);
         }
 
         function addBullet(){
@@ -55,17 +57,21 @@
         }
 
         function tick(event){
-
         	delta = event.delta;
         	player.move();
-        	enemy.checkPlayerPos(player.clip.x,player.clip.y);
+            
+            enemy.checkPlayerPos(player.clip.x,player.clip.y);
 
 
+            //-------------collision detection
+            var intersection = ndgmr.checkRectCollision(player.clip,enemy.clip);
+            if(intersection){
+                stage.removeChild(enemy.clip);
+                enemy.clip.x = -2000;
+            }
 
 
-        	stage.update(delta);
-
-
+        	stage.update(delta);        	
         }
 
         document.addEventListener("mousedown", onMouseDown, true);
