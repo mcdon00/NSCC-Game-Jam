@@ -5,12 +5,9 @@
 var AssetManager = function() {
 	// private variables
 	// manifest of asset information
-	var manifest = [{src:"lib/RedPlane.png", id:"RedPlane", data:{
-						width:40, height:40, regPoint:"center",
-						animations:{flyRight:[0,1],flyLeft:[2,3],
-									flyRightPassenger:[4,5],flyLeftPassenger:[6,7],
-									flipRight:[8,15],flipLeft:[16,23],
-									kill:[24,31]}
+	var manifest = [{src:"character_sheet.png", id:"Character", data:{
+						width:50, height:65, regPoint:"topLeft",
+						animations:{walk:[0,0]}
 					}},
 					{src:"lib/BluePlane.png", id:"BluePlane", data:{
 						width:40, height:20, regPoint:"center", 
@@ -133,6 +130,7 @@ var AssetManager = function() {
 
 	this.load = function() {
 		// construct preloader
+		//console.log(createjs.PreloadJS());
 		preloader = new createjs.PreloadJS();
 		// registers the PreloadJS object with SoundJS - will automatically have access to all sound assets
 		preloader.installPlugin(createjs.SoundJS);

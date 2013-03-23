@@ -15,12 +15,26 @@ function Character(myStage){
 		this.armor = 10;
 		this.inventory = {};
 		this.isAlive = true;
-		this.stage = myStage;
-		this.clip = new createjs.Shape();
-		this.clip.graphics.beginStroke("white").drawPolyStar(0, 0, 15, 3, 0, 10);
+		this.stage = myStage
+		
+		var ss = new createjs.SpriteSheet({ "animations":{
+	        "stand":[0, 0]},
+	        "images":["lib/character_sheet.png"],
+	        "frames":{
+	            "regX":0,
+	            "regY":0,
+	            "height":65,
+	            "width":50,
+	            "count":3
+	        }
+    	});
+    	this.clip = new createjs.BitmapAnimation(ss);
+    	this.clip.gotoAndPlay("stand");
+		//this.clip.graphics.beginStroke("white").drawPolyStar(0, 0, 15, 3, 0, angle);
 		this.clip.y = window.innerHeight/2;
 		this.clip.x = window.innerWidth/2;
 		stage.addChild(this.clip);
+		
 	
 	}
 
@@ -48,46 +62,46 @@ function Character(myStage){
 		//Move down
 		if((down == true) && (left == false) && (right == false)){
 			this.clip.y += this.speed;
-			this.clip.rotation = 180;
+			//this.clip.rotation = 180;
 		}
 		//Move up
 		else if((up == true) && (left == false) && (right == false)){
 			this.clip.y -= this.speed;
-			this.clip.rotation = 0;
+			//this.clip.rotation = 0;
 		}
 		//Move right
 		else if((right == true) && (up == false) && (down == false)){
 			this.clip.x += this.speed;
-			this.clip.rotation = 90;
+			//this.clip.rotation = 90;
 		}
 		//Move left
 		else if((left == true) && (up == false) && (down == false)){
 			this.clip.x -= this.speed;
-			this.clip.rotation = 270;
+			//this.clip.rotation = 270;
 		}
 		//Move down and left
 		else if((down == true) && (left == true)){
 			this.clip.x -= this.speed;
 			this.clip.y += this.speed;
-			this.clip.rotation = 225;
+			//this.clip.rotation = 225;
 		}
 		//Move down and right
 		else if((down == true) && (right == true)){
 			this.clip.x += this.speed;
 			this.clip.y += this.speed;
-			this.clip.rotation = 135;
+			//this.clip.rotation = 135;
 		}
 		//Move up and left
 		else if((up == true) && (left == true)){
 			this.clip.x -= this.speed;
 			this.clip.y -= this.speed;
-			this.clip.rotation = 315;
+			//this.clip.rotation = 315;
 		}
 		//Move up and right
 		else if((up == true) && (right == true)){
 			this.clip.x += this.speed;
 			this.clip.y -= this.speed;
-			this.clip.rotation = 45;
+			//this.clip.rotation = 45;
 		}
 	}
 	
