@@ -141,6 +141,10 @@ function Character(myStage){
 		}
 	}
 
+	this.knockBack = function(){
+
+	}
+
 	document.addEventListener("keydown", this.onKeyDown, true);
 	document.addEventListener("keyup", this.onKeyUp, true);	
 
@@ -155,6 +159,19 @@ function Character(myStage){
 
 	this.getHealth = function(){
 		return this.health;
+	}
+	this.decreaseHealth = function(damage){
+		if(this.armour > 0){
+			if((this.armor - damage) > 0){
+				this.armour -= damage;
+			}else{
+				damage -= this.armor;
+				this.armor = 0;
+				this.health -= damage;
+			}
+		}else{
+			this.health -= damage;	
+		}
 	}
 
 	this.getArmor = function(){
