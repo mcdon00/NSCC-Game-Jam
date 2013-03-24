@@ -4,6 +4,7 @@ var down = false;
 var left = false;
 var right = false;
 var aryRadians = [];
+var playAnim = false;
 
 //Initialize the object
 function Character(myStage){
@@ -19,14 +20,22 @@ function Character(myStage){
 		this.stage = myStage
 
 		var ss = new createjs.SpriteSheet({ "animations":{
-	        "stand":[0, 0]},
+	        "stand":[0, 0],
+	    	"moveLeft":[11, 12],
+	    	"moveDownRight":[1,2],
+	    	"moveRight":[3,4],
+	    	"moveDownLeft":[13,14],
+	    	"moveUpRight":[5,6],
+	    	"moveUpLeft":[9,10],
+	    	"moveUp":[7,8],
+	    	"moveDown":[0,0]},
 	        "images":["lib/player.png"],
 	        "frames":{
-	            "regX":25,
-	            "regY":32.5,
+	            "regX":30,
+	            "regY":46,
 	            "height":92,
 	            "width":60,
-	            "count":3
+	            "count":15
 	        }
     	});
     	this.clip = new createjs.BitmapAnimation(ss);
@@ -57,6 +66,11 @@ function Character(myStage){
 		this.inventory['item'] = item;
 	}
 
+	//When the character picks up an item
+	this.pickUp = function() {
+
+	}
+
 	
 	//Controlling the characters rotations
 	this.move = function(){
@@ -65,45 +79,71 @@ function Character(myStage){
 		//Move down
 		if((down == true) && (left == false) && (right == false)){
 			this.clip.y += this.speed;
+			if(!playAnim){
+				this.clip.gotoAndPlay("moveDown");
+				playAnim = true;
+			}
+			
 			//this.clip.rotation = 180;
 		}
 		//Move up
 		else if((up == true) && (left == false) && (right == false)){
 			this.clip.y -= this.speed;
+			if(!playAnim){
+				this.clip.gotoAndPlay("moveUp");
+				playAnim = true;
+			}	
 			//this.clip.rotation = 0;
 		}
 		//Move right
 		else if((right == true) && (up == false) && (down == false)){
 			this.clip.x += this.speed;
+			if(!playAnim){
+				this.clip.gotoAndPlay("moveRight");
+				playAnim = true;
+			}
 			//this.clip.rotation = 90;
 		}
 		//Move left
 		else if((left == true) && (up == false) && (down == false)){
 			this.clip.x -= this.speed;
+			if(!playAnim){
+				this.clip.gotoAndPlay("moveLeft");
+				playAnim = true;
+			}
 			//this.clip.rotation = 270;
 		}
 		//Move down and left
-		else if((down == true) && (left == true)){
+		if((down == true) && (left == true)){
 			this.clip.x -= this.speed;
 			this.clip.y += this.speed;
+			this.clip.gotoAndPlay("moveDownLeft");
+			playAnim = true;
+			
 			//this.clip.rotation = 225;
 		}
 		//Move down and right
-		else if((down == true) && (right == true)){
+		if((down == true) && (right == true)){
 			this.clip.x += this.speed;
 			this.clip.y += this.speed;
+			this.clip.gotoAndPlay("moveDownRight");
+			playAnim = true;
 			//this.clip.rotation = 135;
 		}
 		//Move up and left
-		else if((up == true) && (left == true)){
+		if((up == true) && (left == true)){
 			this.clip.x -= this.speed;
 			this.clip.y -= this.speed;
+			this.clip.gotoAndPlay("moveUpLeft");
+			playAnim = true;
 			//this.clip.rotation = 315;
 		}
 		//Move up and right
-		else if((up == true) && (right == true)){
+		if((up == true) && (right == true)){
 			this.clip.x += this.speed;
 			this.clip.y -= this.speed;
+			this.clip.gotoAndPlay("moveUpRight");
+			playAnim = true;
 			//this.clip.rotation = 45;
 		}
 	}
@@ -111,7 +151,7 @@ function Character(myStage){
 	this.onKeyUp = function(e){
 		//Moving the ship
 		if(e.keyCode == 40){
-				down = false;
+			down = false;
 		}
 		if(e.keyCode == 38){
 				up = false;
@@ -122,6 +162,7 @@ function Character(myStage){
 		if(e.keyCode == 37){
 				left = false;
 		}
+		playAnim = false;
 		//a = 65, d = 68
 	}
 
@@ -136,14 +177,39 @@ function Character(myStage){
 		}
 		else if(e.keyCode == 39){
 				right = true;
+			if(e.keyCode == 38){
+				up = true;
+			}
 		}
 		else if(e.keyCode == 37){
 				left = true;
 		}
 	}
 
-	this.knockBack = function(){
-
+	this.knockBack = function(direction, event){
+		//directions are just placeholders
+		//What direction do I want him to move
+		if(direction == "north"){
+			this.clip.y += 50;
+		}else if(direction == "east"){
+			this.clip.x -= 50;
+		}else if(direction == "south"){
+			this.clip.y -= 50;
+		}else if(direction == "west"){
+			this.clip.x += 50;
+		}else if(direction == "northEast"){
+			this.clip.y += 25;
+			this.clip.x -= 25;
+		}else if(direction == "northWest"){
+			this.clip.y += 25;
+			this.clip.x += 25;
+		}else if(direction == "southEast"){
+			this.clip.y -= 25;
+			this.clip.x -= 25;
+		}else if(direction == "southWest"){
+			this.clip.y -= 25;
+			this.clip.x += 25;
+		}
 	}
 
 	document.addEventListener("keydown", this.onKeyDown, true);

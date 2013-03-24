@@ -15,8 +15,8 @@ function Bullet(myStage){
 
 		this.clip = new createjs.Shape();
 		this.clip.graphics.beginFill("white").drawRect(-2 , -2 , 3, 3);
-		this.clip.y = player.getPosY();
-		this.clip.x = player.getPosX();
+		//this.clip.y = player.getPosY();
+		//this.clip.x = player.getPosX();
 	}
 
 	this.move = function(bool, str) {
@@ -28,6 +28,18 @@ function Bullet(myStage){
 			this.clip.x += speed;
 		}else if (this.getMoving() && (this.direction == 'left')){
 			this.clip.x -= speed;
+		}else if (this.getMoving() && (this.direction == 'upleft')){
+			this.clip.x -= speed/2;
+			this.clip.y += speed/2
+		}else if (this.getMoving() && (this.direction == 'downleft')){
+			this.clip.x -= speed/2;
+			this.clip.y -= speed/2
+		}else if (this.getMoving() && (this.direction == 'upright')){
+			this.clip.x += speed/2;
+			this.clip.y += speed/2
+		}else if (this.getMoving() && (this.direction == 'downright')){
+			this.clip.x += speed/2;
+			this.clip.y -= speed/2
 		}
 	}
 
@@ -50,8 +62,11 @@ function Bullet(myStage){
 		return this.clip.y;
 	}
 
-	this.onMouseDown = function(){
-
+	this.setPosX = function(x){
+		this.clip.x = x;
+	}
+	this.setPosY = function(y){
+		this.clip.y = y;
 	}
 
 	
