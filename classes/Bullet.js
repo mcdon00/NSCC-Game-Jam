@@ -16,8 +16,27 @@ function Bullet(myStage){
 		this.speedX;
 		this.speedY;
 
-		this.clip = new createjs.Shape();
-		this.clip.graphics.beginFill("white").drawRect(-2 , -2 , 3, 3);
+		var ss = new createjs.SpriteSheet({ "animations":{
+	        "bananaFire":[1, 1],
+	    	"bananaHit":[2, 2],
+	    	"tomatoFire":[3,3],
+	    	"tomateHit":[4,4],
+	    	"peachFire":[0,0],
+	    	"peachHit":[5,5]},
+	        "images":["lib/projectiles.png"],
+	        "frames":{
+	            "regX":12.5,
+	            "regY":12.5,
+	            "height":25,
+	            "width":25,
+	            "count":6
+	        }
+    	});
+    	this.clip = new createjs.BitmapAnimation(ss);
+    	this.clip.gotoAndPlay("bananaFire");
+
+		// this.clip = new createjs.Shape();
+		// this.clip.graphics.beginFill("white").drawRect(-2 , -2 , 3, 3);
 		//this.clip.y = player.getPosY();
 		//this.clip.x = player.getPosX();
 	}
