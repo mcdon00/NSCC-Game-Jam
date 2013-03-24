@@ -12,7 +12,7 @@ function GameWorld(){
 		//Alternatively use can also use the graphics property of the Shape class to renderer the same as above.
 		this.leftBound = new createjs.Shape();
 		//this.leftBound.rotation = 10;
-		this.leftBound.graphics.beginFill("#ff0000").drawRect(90, 80, 25, 450);
+		this.leftBound.graphics.beginFill("#ff0000").drawRect(90, 300, 25, 100);
 			
 		this.rightBound = new createjs.Shape();
 		this.rightBound.graphics.beginFill("#ff0000").drawRect(700, 100, 25, 450);
@@ -28,11 +28,12 @@ function GameWorld(){
 		this.blah.x = 0;
 		this.blah.y = 0;
 
-		stage.addChild(this.topBound);
-		stage.addChild(this.leftBound);
-		stage.addChild(this.rightBound);
-		stage.addChild(this.bottomBound);
+
 		stage.addChild(this.clip);
+		// stage.addChild(this.topBound);
+		// stage.addChild(this.leftBound);
+		// stage.addChild(this.rightBound);
+		// stage.addChild(this.bottomBound);
 		
 		
 		

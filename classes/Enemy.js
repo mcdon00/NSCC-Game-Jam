@@ -102,7 +102,6 @@ function Enemy(myStage){
 					if(!(this.clip.currentAnimation == "moveUp")){
 						this.clip.gotoAndPlay("moveUp");	
 					}
-					
 				}else{
 					if(!(this.clip.currentAnimation == "moveDownLeft")){
 						this.clip.gotoAndPlay("moveDownLeft");
