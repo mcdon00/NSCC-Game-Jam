@@ -58,23 +58,23 @@
         }
         function checkDirection(e){
             //Moving the ship\
-            down=false;
-            up=false;
-            right=false;
-            left=false;
+            // down=false;
+            // up=false;
+            // right=false;
+            // left=false;
 
-            if(e.keyCode == 40){
-                down = true;
-            }
-            else if(e.keyCode == 38){
-                up = true;
-            }
-            else if(e.keyCode == 39){
-                right = true;
-            }
-            else if(e.keyCode == 37){
-                left = true;
-            }
+            // if(e.keyCode == 40){
+            //     down = true;
+            // }
+            // else if(e.keyCode == 38){
+            //     up = true;
+            // }
+            // else if(e.keyCode == 39){
+            //     right = true;
+            // }
+            // else if(e.keyCode == 37){
+            //     left = true;
+            // }
         }
 
         function tick(event){
@@ -93,25 +93,16 @@
                 stage.removeChild(enemy.clip);
                 enemy.clip.x = -2000;
             }
-            // map bounds
 
-            player.speed = 10;
-            if(gameWorld.leftBound.hitTest(player.clip.x,player.clip.y)){
-                if(!right){
-                    player.speed = 0;
-                }
-            }else if(gameWorld.rightBound.hitTest(player.clip.x,player.clip.y)){
-                if(!left){
-                    player.speed = 0;
-                }
-            }else if(gameWorld.topBound.hitTest(player.clip.x,player.clip.y)){
-                if(!down){
-                    player.speed = 0;
-                }
-            }else if(gameWorld.bottomBound.hitTest(player.clip.x,player.clip.y)){
-                if(!up){
-                    player.speed = 0;
-                }
+            // map bounds
+            if(player.clip.x <= stage.x+90){
+                player.speed = 0;
+            }else if(player.clip.x >= canvas.width+90){
+
+            }else if(player.clip.y+player.clip.getBounds()['height'] <= stage.y+200){   
+
+            }else if(player.clip.y >= canvas.height-125){
+                
             }
 
         	stage.update(delta);        	

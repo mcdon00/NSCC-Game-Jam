@@ -60,6 +60,8 @@ function Character(myStage){
 	
 	//Controlling the characters rotations
 	this.move = function(){
+		// console.log(down);
+		// console.log(up);
 		//Move down
 		if((down == true) && (left == false) && (right == false)){
 			this.clip.y += this.speed;
