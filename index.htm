@@ -31,6 +31,8 @@
         var mouseY;
         var angles = [];
         var shooting = false;
+        var bulletSpeedX;
+        var bulletSpeedY;
 
 
         function init(){
@@ -70,12 +72,12 @@
 
         function addBullet(){
 
-
 			//Fun with trig :)
 			//bullets[bulletCount - 1].setMoving(true, 'right');	
 			bullets[bulletCount - 1].setMoving(true, 'left');
         	bullets[bulletCount - 1].setPosX(player.clip.x);
         	bullets[bulletCount - 1].setPosY(player.clip.y);
+        	bullets[bulletCount - 1].setSpeed((bulletSpeedX * 10), (bulletSpeedY * 10));
         	stage.addChild(bullets[bulletCount - 1].clip);
         	bulletCount -= 1;
         	console.log(bulletCount);
@@ -85,53 +87,55 @@
         	console.log('added bullet');
         }
 
-        function onMouseDown(){
-        	
-        }
-        function checkDirection(e){
-            //Moving the ship\
-            // down=false;
-            // up=false;
-            // right=false;
-            // left=false;
+        function onMouseMove(e){
+        	//This is where I will calculate the speeds for the bullet
+        	mouseX = e.pageX;
+        	mouseY = e.pageY;
 
-            // if(e.keyCode == 40){
-            //     down = true;
-            // }
-            // else if(e.keyCode == 38){
-            //     up = true;
-            // }
-            // else if(e.keyCode == 39){
-            //     right = true;
-            // }
-            // else if(e.keyCode == 37){
-            //     left = true;
-            // }
-        }
+        	var rectX = Math.abs(player.clip.x - mouseX);
+        	var rectY = Math.abs(player.clip.y - mouseY);
 
-        function onKeyDown(e){
-        	if(e.keyCode == 32){
-        		//addBullet();
-        		shooting = true;
+        	var rectH = Math.sqrt((rectX * rectX) + (rectY * rectY));
+
+        	//console.log(rectH);
+
+        	bulletSpeedX = rectX / rectH;
+        	bulletSpeedY = rectY / rectH;
+
+        	if((mouseX < player.clip.x) && (mouseY < player.clip.y)){
+        		bulletSpeedX *= -1;
+        		bulletSpeedY *= -1;
         	}
+        	else if((mouseX < player.clip.x) && (mouseY > player.clip.y)){
+        		bulletSpeedX *= -1;
+        	}
+        	else if((mouseX > player.clip.x) && (mouseY < player.clip.y)){
+        		bulletSpeedY *= -1;
+        	}
+
         }
-        function onKeyUp(e){
-        	if(e.keyCode == 32){
-        		//addBullet();
-        		shooting = false;
-        	}	
+
+        function onMouseDown(){
+        	shooting = true;
+        	//addBullet();
+        }
+
+        function onMouseUp(){
+        	shooting = false;
         }
 
 
         function tick(event){
+        	delta = event.delta;
+        	player.move();
+
         	if(shooting){
         		addBullet();
         	}
-        	delta = event.delta;
-        	player.move();
         	
         	for(var i = 0; i < bullets.length; i++){
         		bullets[i].move();
+        		//console.log(bullets[i].clip.x + "   " + bullets[i].getSpeed());
         		//console.log(bullets[i].getMoving());
         	}
 
@@ -187,6 +191,8 @@
         }
 
         document.addEventListener("mousedown", onMouseDown, true);
+        document.addEventListener("mouseup", onMouseUp, true);
+        document.addEventListener("mousemove", onMouseMove, true);
         document.addEventListener("keydown", onKeyDown, true);
         document.addEventListener("keyup", onKeyUp, true);
         document.addEventListener("keypress", checkDirection, true);

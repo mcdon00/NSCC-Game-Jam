@@ -83,8 +83,8 @@ function Enemy(myStage){
 
 	this.move = function(){
 		if(this.isAttack){
-			this.clip.x += this.vx;
-			this.clip.y += this.vy;
+			//this.clip.x += this.vx;
+			//this.clip.y += this.vy;
 		}	
 	}
 
