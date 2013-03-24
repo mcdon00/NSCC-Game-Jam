@@ -20,6 +20,8 @@
         <script type="text/javascript" src="classes/AssetManager.js"></script>
         <script type="text/javascript">
 
+
+        var NUM_OF_ENEMIES = 5;
         var delta;
         var angle;
         var assetManager;
@@ -50,8 +52,18 @@
         	player = new Character(stage);
         	player.init();
 
-            enemy = new Enemy(stage);
-            enemy.init();
+            for(var i=0;i<NUM_OF_ENEMIES;i++){
+                enemy = new Enemy(stage);
+                
+                myX =Math.random() * ((canvas.width-150) - 150) + 150;
+                myY = Math.random() * ((canvas.height-150) - 150) + 150;
+
+                enemy.init(stage,myX,myY);
+                enemies.push(enemy);
+            }
+
+            
+            
 
             poolBullets();
             overlay = new createjs.Text("MouseX: \nMouseY: ", "12px Tahoma", "#FFF");
@@ -142,7 +154,10 @@
         	// delta = event.delta;
         	// player.move();
             
-            enemy.checkPlayerPos(player.clip.x,player.clip.y);
+            for(var i = 0; i < enemies.length; i++){
+                enemies[i].checkPlayerPos(player.clip.x,player.clip.y);    
+            }
+            
 
             //-------------collision detection
             //Loop through for all enemies
