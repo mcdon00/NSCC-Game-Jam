@@ -19,14 +19,15 @@ function Character(myStage){
 		this.stage = myStage
 
 		var ss = new createjs.SpriteSheet({ "animations":{
-	        "stand":[0, 0]},
-	        "images":["lib/character_sheet.png"],
+	        "stand":[0, 0],
+	    	"moveLeft":[]},
+	        "images":["lib/player.png"],
 	        "frames":{
-	            "regX":25,
-	            "regY":32.5,
-	            "height":65,
-	            "width":50,
-	            "count":3
+	            "regX":30,
+	            "regY":46,
+	            "height":92,
+	            "width":60,
+	            "count":15
 	        }
     	});
     	this.clip = new createjs.BitmapAnimation(ss);

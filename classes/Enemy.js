@@ -9,6 +9,7 @@ function Enemy(myStage){
 	
 		this.speed = SPEED;
 		this.stage = myStage
+		this.type="";
 		var ss = new createjs.SpriteSheet({ "animations":{
 	        "stand":[0, 0]},
 	        "images":["lib/character_sheet.png"],
@@ -88,7 +89,8 @@ function Enemy(myStage){
 	}
 
 	this.attack = function(myPlayer){
-
+		//myPlayer.knockBack();
+		// myPlayer.decreaseHealth();
 	}
 
 
