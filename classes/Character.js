@@ -4,6 +4,7 @@ var down = false;
 var left = false;
 var right = false;
 var aryRadians = [];
+var playAnim = false;
 
 //Initialize the object
 function Character(myStage){
@@ -20,7 +21,14 @@ function Character(myStage){
 
 		var ss = new createjs.SpriteSheet({ "animations":{
 	        "stand":[0, 0],
-	    	"moveLeft":[]},
+	    	"moveLeft":[11, 12],
+	    	"moveDownRight":[1,2],
+	    	"moveRight":[3,4],
+	    	"moveDownLeft":[13,14],
+	    	"moveUpRight":[5,6],
+	    	"moveUpLeft":[9,10],
+	    	"moveUp":[7,8],
+	    	"moveDown":[0,0]},
 	        "images":["lib/player.png"],
 	        "frames":{
 	            "regX":30,
@@ -69,45 +77,78 @@ function Character(myStage){
 		//Move down
 		if((down == true) && (left == false) && (right == false)){
 			this.clip.y += this.speed;
+			if(!playAnim){
+				this.clip.gotoAndPlay("moveDown");
+				playAnim = true;
+			}
+			
 			//this.clip.rotation = 180;
 		}
 		//Move up
 		else if((up == true) && (left == false) && (right == false)){
 			this.clip.y -= this.speed;
+			if(!playAnim){
+				this.clip.gotoAndPlay("moveUp");
+				playAnim = true;
+			}	
 			//this.clip.rotation = 0;
 		}
 		//Move right
 		else if((right == true) && (up == false) && (down == false)){
 			this.clip.x += this.speed;
+			if(!playAnim){
+				this.clip.gotoAndPlay("moveRight");
+				playAnim = true;
+			}
 			//this.clip.rotation = 90;
 		}
 		//Move left
 		else if((left == true) && (up == false) && (down == false)){
 			this.clip.x -= this.speed;
+			if(!playAnim){
+				this.clip.gotoAndPlay("moveLeft");
+				playAnim = true;
+			}
 			//this.clip.rotation = 270;
 		}
 		//Move down and left
 		else if((down == true) && (left == true)){
 			this.clip.x -= this.speed;
 			this.clip.y += this.speed;
+			if(!playAnim){
+				this.clip.gotoAndPlay("moveDownLeft");
+				playAnim = true;
+			}
 			//this.clip.rotation = 225;
 		}
 		//Move down and right
 		else if((down == true) && (right == true)){
 			this.clip.x += this.speed;
 			this.clip.y += this.speed;
+			if(!playAnim){
+				this.clip.gotoAndPlay("moveDownRight");
+				playAnim = true;
+			}
 			//this.clip.rotation = 135;
 		}
 		//Move up and left
 		else if((up == true) && (left == true)){
 			this.clip.x -= this.speed;
 			this.clip.y -= this.speed;
+			if(!playAnim){
+				this.clip.gotoAndPlay("moveUpLeft");
+				playAnim = true;
+			}
 			//this.clip.rotation = 315;
 		}
 		//Move up and right
 		else if((up == true) && (right == true)){
 			this.clip.x += this.speed;
 			this.clip.y -= this.speed;
+			if(!playAnim){
+				this.clip.gotoAndPlay("moveUpRight");
+				playAnim = true;
+			}
 			//this.clip.rotation = 45;
 		}
 	}
@@ -126,6 +167,7 @@ function Character(myStage){
 		if(e.keyCode == 37){
 				left = false;
 		}
+		playAnim = false;
 		//a = 65, d = 68
 	}
 

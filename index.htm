@@ -128,15 +128,15 @@
         		addBullet();
         	}
         	delta = event.delta;
-        	player.move(event.delta);
+        	player.move();
         	
         	for(var i = 0; i < bullets.length; i++){
         		bullets[i].move();
         		//console.log(bullets[i].getMoving());
         	}
 
-        	delta = event.delta;
-        	player.move();
+        	// delta = event.delta;
+        	// player.move();
             
             enemy.checkPlayerPos(player.clip.x,player.clip.y);
 
@@ -164,7 +164,7 @@
             }
             // map bounds
 
-            player.speed = 10;
+            //player.speed = 10;
             if(gameWorld.leftBound.hitTest(player.clip.x,player.clip.y)){
                 if(!right){
                     player.speed = 0;
