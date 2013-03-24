@@ -23,8 +23,8 @@ function Enemy(myStage){
 	        "frames":{
 	            "regX":59,
 	            "regY":52,
-	            "height":104,
-	            "width":119,
+	            "height":101,
+	            "width":108,
 	            "count":23
 	        }
     	});
