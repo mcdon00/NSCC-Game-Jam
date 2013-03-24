@@ -74,6 +74,8 @@ function Character(myStage){
 	
 	//Controlling the characters rotations
 	this.move = function(){
+		// console.log(down);
+		// console.log(up);
 		//Move down
 		if((down == true) && (left == false) && (right == false)){
 			this.clip.y += this.speed;
@@ -154,7 +156,6 @@ function Character(myStage){
 				this.clip.gotoAndPlay("moveUpRight");
 				playAnim = true;
 			}
-			
 			//this.clip.rotation = 45;
 		}
 	}
@@ -162,7 +163,7 @@ function Character(myStage){
 	this.onKeyUp = function(e){
 		//Moving the ship
 		if(e.keyCode == 40){
-				down = false;
+			down = false;
 		}
 		if(e.keyCode == 38){
 				up = false;
@@ -188,6 +189,9 @@ function Character(myStage){
 		}
 		else if(e.keyCode == 39){
 				right = true;
+			if(e.keyCode == 38){
+				up = true;
+			}
 		}
 		else if(e.keyCode == 37){
 				left = true;

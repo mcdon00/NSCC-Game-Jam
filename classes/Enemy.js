@@ -2,7 +2,7 @@ function Enemy(myStage){
 	//constants
 	var HEALTH = 800;
 	var SPEED = 7;
-	var DISTANCE_TO_ATTACK = 300;
+	var DISTANCE_TO_ATTACK = 100;
 
 	//------------------------------contructor
 	this.init = function(myStage){

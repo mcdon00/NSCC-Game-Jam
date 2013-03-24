@@ -149,7 +149,7 @@
             // enemy/player
             var intersection = ndgmr.checkRectCollision(player.clip,enemy.clip);
             if(intersection){
-            	console.log(intersection);
+            	// console.log(intersection);
 
             	// if(intersection.rect2.x > (intersection.rect1.x - (intersection.rect1.regX + 15))){
             	// 	player.knockBack("east");
@@ -166,25 +166,34 @@
                 // stage.removeChild(enemy.clip);
                 // enemy.clip.x = -2000;
             }
+
             // map bounds
+            if(player.clip.x <= stage.x+90){
+                player.speed = 0;
+            }else if(player.clip.x >= canvas.width+90){
+
+            }else if(player.clip.y+player.clip.getBounds()['height'] <= stage.y+200){   
+
+
+            }else if(player.clip.y >= canvas.height-125){
 
             //player.speed = 10;
-            if(gameWorld.leftBound.hitTest(player.clip.x,player.clip.y)){
-                if(!right){
-                    player.speed = 0;
-                }
-            }else if(gameWorld.rightBound.hitTest(player.clip.x,player.clip.y)){
-                if(!left){
-                    player.speed = 0;
-                }
-            }else if(gameWorld.topBound.hitTest(player.clip.x,player.clip.y)){
-                if(!down){
-                    player.speed = 0;
-                }
-            }else if(gameWorld.bottomBound.hitTest(player.clip.x,player.clip.y)){
-                if(!up){
-                    player.speed = 0;
-                }
+            // if(gameWorld.leftBound.hitTest(player.clip.x,player.clip.y)){
+            //     if(!right){
+            //         player.speed = 0;
+            //     }
+            // }else if(gameWorld.rightBound.hitTest(player.clip.x,player.clip.y)){
+            //     if(!left){
+            //         player.speed = 0;
+            //     }
+            // }else if(gameWorld.topBound.hitTest(player.clip.x,player.clip.y)){
+            //     if(!down){
+            //         player.speed = 0;
+            //     }
+            // }else if(gameWorld.bottomBound.hitTest(player.clip.x,player.clip.y)){
+            //     if(!up){
+            //         player.speed = 0;
+            //     }
             }
 
         	stage.update(delta);        	
