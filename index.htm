@@ -166,6 +166,18 @@
             if(intersection){
 
             }
+
+            for(var i = 0; i < bullets.length; i++){
+            	for(var n = 0; n < enemies.length; n++){
+            		var bulletIntersection = ndgmr.checkRectCollision(bullets[i].clip, enemies[n].clip);
+            		if(bulletIntersection){
+            			stage.removeChild(bullets[i].clip);
+            			stage.removeChild(enemies[n].clip);
+            			enemies[n].clip.x = 2000;
+            		}		
+            	}
+            }
+            
             
 
             // map bounds

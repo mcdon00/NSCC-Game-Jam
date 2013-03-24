@@ -4,7 +4,7 @@ function GameWorld(){
 		this.level = myLevel;
 		this.stage = myStage;
     	this.clip = new createjs.Bitmap(this.level);
-    	this.blah = new createjs.Bitmap("lib/foo.png");
+    	//this.blah = new createjs.Bitmap("lib/foo.png");
 		this.clip.y = 0;
 		this.clip.x = 0;
 		this.width = this.clip.width;
@@ -29,8 +29,8 @@ function GameWorld(){
 		this.bottomBound.alpha = 0;
 
 		
-		this.blah.x = 0;
-		this.blah.y = 0;
+		//this.blah.x = 0;
+		//this.blah.y = 0;
 
 		stage.addChild(this.topBound);
 		stage.addChild(this.leftBound);
