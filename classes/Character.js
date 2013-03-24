@@ -20,12 +20,12 @@ function Character(myStage){
 
 		var ss = new createjs.SpriteSheet({ "animations":{
 	        "stand":[0, 0]},
-	        "images":["lib/character_sheet.png"],
+	        "images":["lib/player.png"],
 	        "frames":{
 	            "regX":25,
 	            "regY":32.5,
-	            "height":65,
-	            "width":50,
+	            "height":92,
+	            "width":60,
 	            "count":3
 	        }
     	});

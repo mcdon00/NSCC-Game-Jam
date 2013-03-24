@@ -97,28 +97,22 @@
 
             player.speed = 10;
             if(gameWorld.leftBound.hitTest(player.clip.x,player.clip.y)){
-                if(left){
+                if(!right){
                     player.speed = 0;
-                    console.log(gameWorld.leftBound);
                 }
             }else if(gameWorld.rightBound.hitTest(player.clip.x,player.clip.y)){
-                if(right){
+                if(!left){
                     player.speed = 0;
                 }
             }else if(gameWorld.topBound.hitTest(player.clip.x,player.clip.y)){
-                if(up){
+                if(!down){
                     player.speed = 0;
                 }
             }else if(gameWorld.bottomBound.hitTest(player.clip.x,player.clip.y)){
-                if(down){
+                if(!up){
                     player.speed = 0;
                 }
             }
-
-
-
-
-
 
         	stage.update(delta);        	
         }
