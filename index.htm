@@ -182,12 +182,20 @@
 
             if(gameWorld.leftBound.hitTest(player.clip.x,player.clip.y)){
                 gameWorld.changeLevel("lib/FurnitureBG.png");
+                player.clip.x = 650;
+                player.clip.y = 235; 
             }else if(gameWorld.rightBound.hitTest(player.clip.x,player.clip.y)){
-                
+                gameWorld.changeLevel("lib/MachinesBG.png");
+                player.clip.x = 100;
+                player.clip.y = 235; 
             }else if(gameWorld.topBound.hitTest(player.clip.x,player.clip.y)){
-                
+                gameWorld.changeLevel("lib/RubbishBG.png");
+                player.clip.x = 360;
+                player.clip.y = 525; 
             }else if(gameWorld.bottomBound.hitTest(player.clip.x,player.clip.y)){
-                
+                gameWorld.changeLevel("lib/ToxicBG.png");
+                player.clip.x = 360;
+                player.clip.y = 150; 
             }
 
         	stage.update(delta);        	
