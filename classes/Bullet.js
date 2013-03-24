@@ -2,7 +2,8 @@
 //var bulletCount = 100;
 //var bullets = [];
 var moving;
-var speed;
+//var speedX;
+//var speedY;
 
 function Bullet(myStage){
 	//this.hi = "hi";
@@ -12,6 +13,8 @@ function Bullet(myStage){
 		moving = false;
 		speed = 15;
 		stage = myStage;
+		this.speedX;
+		this.speedY;
 
 		this.clip = new createjs.Shape();
 		this.clip.graphics.beginFill("white").drawRect(-2 , -2 , 3, 3);
@@ -19,27 +22,10 @@ function Bullet(myStage){
 		//this.clip.x = player.getPosX();
 	}
 
-	this.move = function(bool, str) {
-		if(this.getMoving() && (this.direction == 'up')){
-			this.clip.y -= speed;
-		}else if (this.getMoving() && (this.direction == 'down')){
-			this.clip.y += speed;
-		}else if (this.getMoving() && (this.direction == 'right')){
-			this.clip.x += speed;
-		}else if (this.getMoving() && (this.direction == 'left')){
-			this.clip.x -= speed;
-		}else if (this.getMoving() && (this.direction == 'upleft')){
-			this.clip.x -= speed/2;
-			this.clip.y += speed/2
-		}else if (this.getMoving() && (this.direction == 'downleft')){
-			this.clip.x -= speed/2;
-			this.clip.y -= speed/2
-		}else if (this.getMoving() && (this.direction == 'upright')){
-			this.clip.x += speed/2;
-			this.clip.y += speed/2
-		}else if (this.getMoving() && (this.direction == 'downright')){
-			this.clip.x += speed/2;
-			this.clip.y -= speed/2
+	this.move = function() {
+		if(this.getMoving()){
+			this.clip.x += this.speedX;
+			this.clip.y += this.speedY;
 		}
 	}
 
@@ -51,9 +37,7 @@ function Bullet(myStage){
 	this.getMoving = function(){
 		return moving;
 	}
-	this.getDirection = function(){
-		return this.direction;
-	}
+
 	this.getPosX = function() {
 		return this.clip.x;
 	}	
@@ -69,6 +53,12 @@ function Bullet(myStage){
 		this.clip.y = y;
 	}
 
-	
+	this.setSpeed = function(sx,sy){
+		this.speedX = sx;
+		this.speedY = sy;
+	}
+	this.getSpeed = function(){
+		return this.speedX + this.speedY;
+	}
 	
 }
