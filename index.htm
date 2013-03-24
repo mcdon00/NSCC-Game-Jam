@@ -149,22 +149,11 @@
             // enemy/player
             var intersection = ndgmr.checkRectCollision(player.clip,enemy.clip);
             if(intersection){
-            	// console.log(intersection);
 
-            	// if(intersection.rect2.x > (intersection.rect1.x - (intersection.rect1.regX + 15))){
-            	// 	player.knockBack("east");
-            	// }
-            	// else if(intersection.rect2.x < (intersection.rect1.x + (intersection.rect1.regX + 15))){
-            	// 	player.knockBack("west");
-            	// }
-
-            	// else if(intersection.rect2.y < (intersection.rect1.y + (intersection.rect1.regY + 30))){
-            	// 	player.knockBack("north");	
-            	// }
-            	//player.knockBack("northEast");
-
-                // stage.removeChild(enemy.clip);
-                // enemy.clip.x = -2000;
+            }
+            var bulletIntersect = ndgmr.checkRectCollision(enemy.clip, bullet.clip);
+            if(bulletIntersect){
+            	stage.removeChild(enemy.clip);
             }
 
             // map bounds
