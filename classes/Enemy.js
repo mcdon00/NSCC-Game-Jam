@@ -124,7 +124,7 @@ function Enemy(myStage){
 
 	this.attack = function(myPlayer){
 		//myPlayer.knockBack();
-		// myPlayer.decreaseHealth();
+		myPlayer.decreaseHealth(0.1);
 	}
 
 

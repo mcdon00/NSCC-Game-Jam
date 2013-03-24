@@ -33,8 +33,12 @@
         var mouseY;
         var angles = [];
         var shooting = false;
+        var playSquish = false;
+
         var bulletSpeedX;
         var bulletSpeedY;
+
+        var myInstance;
 
 
         function init(){
@@ -60,18 +64,29 @@
 
                 enemy.init(stage,myX,myY);
                 enemies.push(enemy);
+
+                myInstance = createjs.Sound.play("lib/squish.wav");
+                myInstance.addEventListener("complete", playAgain);
             }
 
-            
-            
-
             poolBullets();
-            overlay = new createjs.Text("MouseX: \nMouseY: ", "12px Tahoma", "#FFF");
+            overlay = new createjs.Text("", "30px Tahoma", "#FFF");
             overlay.x = 25;
 			overlay.y = 20;
 			stage.addChild(overlay);
 
         	createjs.Ticker.addEventListener("tick", tick);
+        }
+
+        function gameOver(){
+            gameover = new createjs.Text("GAME OVER", "30px Tahoma", "#FFF");
+            gameover.y = canvas.width/2;
+            gameover.x = canvas.height/2;
+            stage.addChild(gameover);
+        }
+
+        function playAgain(event) {
+            myInstance.play();
         }
 
         function poolBullets(){
@@ -129,15 +144,25 @@
 
         function onMouseDown(){
         	shooting = true;
+            playSquish = true;
+
         	//addBullet();
         }
+        
 
         function onMouseUp(){
         	shooting = false;
+            playSquish = false;
+            
         }
 
 
         function tick(event){
+
+            if(player.health >= 0){
+
+            
+            overlay.text = "Health: " + Math.round(player.getHealth());
         	delta = event.delta;
         	player.move();
 
@@ -154,18 +179,20 @@
         	// delta = event.delta;
         	// player.move();
             
-            for(var i = 0; i < enemies.length; i++){
-                enemies[i].checkPlayerPos(player.clip.x,player.clip.y);    
-            }
+            
             
 
             //-------------collision detection
             //Loop through for all enemies
             // enemy/player
-            var intersection = ndgmr.checkRectCollision(player.clip,enemy.clip);
-            if(intersection){
-
+            for(var i = 0; i < enemies.length; i++){
+                enemies[i].checkPlayerPos(player.clip.x,player.clip.y);    
+                var intersection = ndgmr.checkRectCollision(player.clip,enemy.clip);
+                if(intersection){
+                    enemies[i].attack(player);
+                }
             }
+            
 
             for(var i = 0; i < bullets.length; i++){
             	for(var n = 0; n < enemies.length; n++){
@@ -177,7 +204,9 @@
             		}		
             	}
             }
-            
+
+            //if(playSquish)squishSound.play("lib/squish.wav");
+            if(playSquish)playAgain();
             
 
             // map bounds
@@ -210,7 +239,11 @@
                 player.clip.y = 150; 
             }
 
-        	stage.update(delta);        	
+        	
+            }else{
+                gameOver();
+            }
+            stage.update(delta);        	
         }
 
         document.addEventListener("mousedown", onMouseDown, true);
