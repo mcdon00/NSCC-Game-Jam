@@ -184,7 +184,7 @@
 
             // map bounds
             if(player.clip.x <= stage.x+90){
-                player.speed = 0;
+                // player.speed = 0;
             }else if(player.clip.x >= canvas.width+90){
 
             }else if(player.clip.y+player.clip.getBounds()['height'] <= stage.y+200){   
@@ -192,23 +192,16 @@
 
             }else if(player.clip.y >= canvas.height-125){
 
-            //player.speed = 10;
-            // if(gameWorld.leftBound.hitTest(player.clip.x,player.clip.y)){
-            //     if(!right){
-            //         player.speed = 0;
-            //     }
-            // }else if(gameWorld.rightBound.hitTest(player.clip.x,player.clip.y)){
-            //     if(!left){
-            //         player.speed = 0;
-            //     }
-            // }else if(gameWorld.topBound.hitTest(player.clip.x,player.clip.y)){
-            //     if(!down){
-            //         player.speed = 0;
-            //     }
-            // }else if(gameWorld.bottomBound.hitTest(player.clip.x,player.clip.y)){
-            //     if(!up){
-            //         player.speed = 0;
-            //     }
+            }
+
+            if(gameWorld.leftBound.hitTest(player.clip.x,player.clip.y)){
+                gameWorld.changeLevel("lib/FurnitureBG.png");
+            }else if(gameWorld.rightBound.hitTest(player.clip.x,player.clip.y)){
+                
+            }else if(gameWorld.topBound.hitTest(player.clip.x,player.clip.y)){
+                
+            }else if(gameWorld.bottomBound.hitTest(player.clip.x,player.clip.y)){
+                
             }
 
         	stage.update(delta);        	
@@ -217,9 +210,6 @@
         document.addEventListener("mousedown", onMouseDown, true);
         document.addEventListener("mouseup", onMouseUp, true);
         document.addEventListener("mousemove", onMouseMove, true);
-        document.addEventListener("keydown", onKeyDown, true);
-        document.addEventListener("keyup", onKeyUp, true);
-        document.addEventListener("keypress", checkDirection, true);
 
 
         </script>

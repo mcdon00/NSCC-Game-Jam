@@ -12,7 +12,7 @@ function GameWorld(){
 		//Alternatively use can also use the graphics property of the Shape class to renderer the same as above.
 		this.leftBound = new createjs.Shape();
 		//this.leftBound.rotation = 10;
-		this.leftBound.graphics.beginFill("#ff0000").drawRect(90, 300, 25, 100);
+		this.leftBound.graphics.beginFill("#ff0000").drawRect(65, 235, 25, 50);
 			
 		this.rightBound = new createjs.Shape();
 		this.rightBound.graphics.beginFill("#ff0000").drawRect(700, 100, 25, 450);
@@ -44,5 +44,6 @@ function GameWorld(){
 
 	this.changeLevel =function(myLevel){
 		this.level = myLevel;
+		this.clip.set(new createjs.Bitmap(this.level))
 	}	
 }
