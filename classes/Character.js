@@ -79,7 +79,7 @@ function Character(myStage){
 		//Move down
 		if((down == true) && (left == false) && (right == false)){
 			this.clip.y += this.speed;
-			if(!playAnim){
+			if(!(this.clip.currentAnimation == "moveDown")){
 				this.clip.gotoAndPlay("moveDown");
 				playAnim = true;
 			}
@@ -89,61 +89,73 @@ function Character(myStage){
 		//Move up
 		else if((up == true) && (left == false) && (right == false)){
 			this.clip.y -= this.speed;
-			if(!playAnim){
+			if(!(this.clip.currentAnimation == "moveUp")){
 				this.clip.gotoAndPlay("moveUp");
 				playAnim = true;
-			}	
+			}
+				
 			//this.clip.rotation = 0;
 		}
 		//Move right
 		else if((right == true) && (up == false) && (down == false)){
 			this.clip.x += this.speed;
-			if(!playAnim){
+			if(!(this.clip.currentAnimation == "moveRight")){
 				this.clip.gotoAndPlay("moveRight");
 				playAnim = true;
 			}
+			
 			//this.clip.rotation = 90;
 		}
 		//Move left
 		else if((left == true) && (up == false) && (down == false)){
 			this.clip.x -= this.speed;
-			if(!playAnim){
+			if(!(this.clip.currentAnimation == "moveLeft")){
 				this.clip.gotoAndPlay("moveLeft");
 				playAnim = true;
 			}
+			
 			//this.clip.rotation = 270;
 		}
 		//Move down and left
 		if((down == true) && (left == true)){
 			this.clip.x -= this.speed;
 			this.clip.y += this.speed;
-			this.clip.gotoAndPlay("moveDownLeft");
-			playAnim = true;
-			
+			if(!(this.clip.currentAnimation == "moveDownLeft")){
+				this.clip.gotoAndPlay("moveDownLeft");
+				playAnim = true;
+			}
 			//this.clip.rotation = 225;
 		}
 		//Move down and right
 		if((down == true) && (right == true)){
 			this.clip.x += this.speed;
 			this.clip.y += this.speed;
-			this.clip.gotoAndPlay("moveDownRight");
-			playAnim = true;
+			if(!(this.clip.currentAnimation == "moveDownRight")){
+				this.clip.gotoAndPlay("moveDownRight");
+				playAnim = true;
+			}
+			
 			//this.clip.rotation = 135;
 		}
 		//Move up and left
 		if((up == true) && (left == true)){
 			this.clip.x -= this.speed;
 			this.clip.y -= this.speed;
-			this.clip.gotoAndPlay("moveUpLeft");
-			playAnim = true;
+			if(!(this.clip.currentAnimation == "moveUpLeft")){
+				this.clip.gotoAndPlay("moveUpLeft");
+				playAnim = true;
+			}
+			
 			//this.clip.rotation = 315;
 		}
 		//Move up and right
 		if((up == true) && (right == true)){
 			this.clip.x += this.speed;
 			this.clip.y -= this.speed;
-			this.clip.gotoAndPlay("moveUpRight");
-			playAnim = true;
+			if(!(this.clip.currentAnimation == "moveUpRight")){
+				this.clip.gotoAndPlay("moveUpRight");
+				playAnim = true;
+			}
 			//this.clip.rotation = 45;
 		}
 	}
