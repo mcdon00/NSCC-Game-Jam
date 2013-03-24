@@ -16,6 +16,7 @@
         <script type="text/javascript" src="classes/Character.js"></script>
         <script type="text/javascript" src="classes/Enemy.js"></script>
         <script type="text/javascript" src="classes/Bullet.js"></script>
+        <script type="text/javascript" src="classes/GameWorld.js"></script>
         <script type="text/javascript" src="classes/AssetManager.js"></script>
         <script type="text/javascript">
 
@@ -27,14 +28,14 @@
         function init(){
 
         	//Create stage
-
-        	assetManager = new AssetManager();
-        	assetManager.load();
-
         	canvas = document.getElementById("canvas");
         	canvas.height = 600;
 			canvas.width = 800;
+
 			stage = new createjs.Stage(canvas);
+
+            gameWorld = new GameWorld();
+            gameWorld.init(stage,"lib/ApplianceBGFlash.png");
 
         	player = new Character(stage);
         	player.init();
@@ -55,26 +56,75 @@
         function onMouseDown(){
         	addBullet();
         }
+        function checkDirection(e){
+            //Moving the ship\
+            down=false;
+            up=false;
+            right=false;
+            left=false;
+
+            if(e.keyCode == 40){
+                down = true;
+            }
+            else if(e.keyCode == 38){
+                up = true;
+            }
+            else if(e.keyCode == 39){
+                right = true;
+            }
+            else if(e.keyCode == 37){
+                left = true;
+            }
+        }
 
         function tick(event){
+
         	delta = event.delta;
         	player.move();
+
             
             enemy.checkPlayerPos(player.clip.x,player.clip.y);
 
 
             //-------------collision detection
+            // enemy/player
             var intersection = ndgmr.checkRectCollision(player.clip,enemy.clip);
             if(intersection){
                 stage.removeChild(enemy.clip);
                 enemy.clip.x = -2000;
             }
+            // map bounds
+
+            player.speed = 10;
+            if(gameWorld.leftBound.hitTest(player.clip.x,player.clip.y)){
+                if(left){
+                    player.speed = 0;
+                    console.log(gameWorld.leftBound);
+                }
+            }else if(gameWorld.rightBound.hitTest(player.clip.x,player.clip.y)){
+                if(right){
+                    player.speed = 0;
+                }
+            }else if(gameWorld.topBound.hitTest(player.clip.x,player.clip.y)){
+                if(up){
+                    player.speed = 0;
+                }
+            }else if(gameWorld.bottomBound.hitTest(player.clip.x,player.clip.y)){
+                if(down){
+                    player.speed = 0;
+                }
+            }
+
+
+
+
 
 
         	stage.update(delta);        	
         }
 
         document.addEventListener("mousedown", onMouseDown, true);
+        document.addEventListener("keypress", checkDirection, true);
 
 
         </script>
