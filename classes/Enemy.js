@@ -2,7 +2,7 @@ function Enemy(myStage){
 	//constants
 	var HEALTH = 800;
 	var SPEED = 7;
-	var DISTANCE_TO_ATTACK = 100;
+	var DISTANCE_TO_ATTACK = 300;
 
 	//------------------------------contructor
 	this.init = function(myStage){
@@ -13,8 +13,8 @@ function Enemy(myStage){
 	        "stand":[0, 0]},
 	        "images":["lib/character_sheet.png"],
 	        "frames":{
-	            "regX":0,
-	            "regY":0,
+	            "regX":25,
+	            "regY":32.5,
 	            "height":65,
 	            "width":50,
 	            "count":3

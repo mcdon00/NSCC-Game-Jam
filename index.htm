@@ -23,9 +23,17 @@
         var angle;
         var assetManager;
         var enemies = [];
+        var bullets = [];
+        var bulletCount;
+        var overlay;
+        var mouseX;
+        var mouseY;
+        var angles = [];
+        var shooting = false;
+
 
         function init(){
-
+        	bulletCount = 50;
         	//Create stage
 
         	assetManager = new AssetManager();
@@ -42,32 +50,93 @@
             enemy = new Enemy(stage);
             enemy.init();
 
+            poolBullets();
+            overlay = new createjs.Text("MouseX: \nMouseY: ", "12px Tahoma", "#FFF");
+            overlay.x = 25;
+			overlay.y = 20;
+			stage.addChild(overlay);
+
         	createjs.Ticker.addEventListener("tick", tick);
         }
 
+        function poolBullets(){
+        	while(bullets.length < bulletCount ){
+        		bullet = new Bullet(stage);
+        		bullet.init();
+        		bullets.push(bullet);
+        	}
+        }
+
         function addBullet(){
-			bullet = new Bullet(stage);
-        	bullet.init();     
-        	stage.addChild(bullet.clip); 
-        	console.log('added bullet');  	
+
+
+			//Fun with trig :)
+			//bullets[bulletCount - 1].setMoving(true, 'right');	
+			bullets[bulletCount - 1].setMoving(true, 'left');
+        	bullets[bulletCount - 1].setPosX(player.clip.x);
+        	bullets[bulletCount - 1].setPosY(player.clip.y);
+        	stage.addChild(bullets[bulletCount - 1].clip);
+        	bulletCount -= 1;
+        	console.log(bulletCount);
+
+        	if(bulletCount == 0) bulletCount = 50;
+
+        	console.log('added bullet');
         }
 
         function onMouseDown(){
-        	addBullet();
+        	
         }
 
+        function onKeyDown(e){
+        	if(e.keyCode == 32){
+        		//addBullet();
+        		shooting = true;
+        	}
+        }
+        function onKeyUp(e){
+        	if(e.keyCode == 32){
+        		//addBullet();
+        		shooting = false;
+        	}	
+        }
+
+
         function tick(event){
+        	if(shooting){
+        		addBullet();
+        	}
         	delta = event.delta;
         	player.move();
+        	
+        	for(var i = 0; i < bullets.length; i++){
+        		bullets[i].move();
+        		//console.log(bullets[i].getMoving());
+        	}
             
             enemy.checkPlayerPos(player.clip.x,player.clip.y);
 
 
             //-------------collision detection
+            //Loop through for all enemies
             var intersection = ndgmr.checkRectCollision(player.clip,enemy.clip);
             if(intersection){
-                stage.removeChild(enemy.clip);
-                enemy.clip.x = -2000;
+            	console.log(intersection);
+
+            	// if(intersection.rect2.x > (intersection.rect1.x - (intersection.rect1.regX + 15))){
+            	// 	player.knockBack("east");
+            	// }
+            	// else if(intersection.rect2.x < (intersection.rect1.x + (intersection.rect1.regX + 15))){
+            	// 	player.knockBack("west");
+            	// }
+
+            	// else if(intersection.rect2.y < (intersection.rect1.y + (intersection.rect1.regY + 30))){
+            	// 	player.knockBack("north");	
+            	// }
+            	//player.knockBack("northEast");
+
+                // stage.removeChild(enemy.clip);
+                // enemy.clip.x = -2000;
             }
 
 
@@ -75,6 +144,9 @@
         }
 
         document.addEventListener("mousedown", onMouseDown, true);
+        document.addEventListener("keydown", onKeyDown, true);
+        document.addEventListener("keyup", onKeyUp, true);
+
 
 
         </script>

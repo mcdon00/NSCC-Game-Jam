@@ -57,6 +57,11 @@ function Character(myStage){
 		this.inventory['item'] = item;
 	}
 
+	//When the character picks up an item
+	this.pickUp = function() {
+
+	}
+
 	
 	//Controlling the characters rotations
 	this.move = function(){
@@ -140,8 +145,30 @@ function Character(myStage){
 		}
 	}
 
-	this.knockBack = function(){
-
+	this.knockBack = function(direction, event){
+		//directions are just placeholders
+		//What direction do I want him to move
+		if(direction == "north"){
+			this.clip.y += 50;
+		}else if(direction == "east"){
+			this.clip.x -= 50;
+		}else if(direction == "south"){
+			this.clip.y -= 50;
+		}else if(direction == "west"){
+			this.clip.x += 50;
+		}else if(direction == "northEast"){
+			this.clip.y += 25;
+			this.clip.x -= 25;
+		}else if(direction == "northWest"){
+			this.clip.y += 25;
+			this.clip.x += 25;
+		}else if(direction == "southEast"){
+			this.clip.y -= 25;
+			this.clip.x -= 25;
+		}else if(direction == "southWest"){
+			this.clip.y -= 25;
+			this.clip.x += 25;
+		}
 	}
 
 	document.addEventListener("keydown", this.onKeyDown, true);
